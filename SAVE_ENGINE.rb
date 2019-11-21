@@ -108,10 +108,11 @@ module YEA
     
     #MENU PORTRAIT CONFIG
     XPOS = 20
-    YPOS = -120
+    YPOS = -100
     SPACING = 160
     BF_XPOS = 470
     BF_SPACING = 100
+    DRAW_FOOTER = false
     
   end # SAVE
 end # YEA
@@ -518,6 +519,10 @@ class Window_FileStatus < Window_Base
       else
       draw_image(xb,yb,"graphics/Pictures/" + poop.to_s + ".png")
       end
+      if (YEA::SAVE::DRAW_FOOTER != false)
+        draw_image(xb - 750,yb + 50,"graphics/Pictures/SAM_Menu_PortraitFade.png")
+      end
+    
     end
   
     #extra test
