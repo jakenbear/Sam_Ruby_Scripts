@@ -3,7 +3,7 @@
 #------------------------------------------------------------------------------
 #  An interpreter for executing event commands. This class is used within the
 # Game_Map, Game_Troop, and Game_Event classes.
-# SAM EDITS: V 1.00
+# SAM EDITS: V 1.01
 #==============================================================================
 
 class Game_Interpreter
@@ -446,7 +446,34 @@ class Game_Interpreter
     when 10  # Armor
       result = $game_party.has_item?($data_armors[@params[1]], @params[2])
     when 11  # Button
-      result = Input.press?(@params[1])
+      if $game_switches[1207] == false
+        result = Input.press?(@params[1])
+      else
+        # JAR CUSTON CONTROLLER HACK SCRIPT
+        result = Input.press?(@params[1])
+        mydir = @params[1]
+        if (eval("Input.trigger?(:DOWN)") == true) && (mydir == 2) 
+          result = Input.trigger?(:DOWN)
+        end
+        if (eval("Input.trigger?(:LEFT)") == true) && (mydir == 4) 
+          result = Input.trigger?(:LEFT)
+        end
+        if (eval("Input.trigger?(:RIGHT)") == true) && (mydir == 6) 
+          result = Input.trigger?(:RIGHT)
+        end
+        if (eval("Input.trigger?(:UP)") == true) && (mydir == 8) 
+          result = Input.trigger?(:UP)
+        end
+        if (eval("Input.trigger?(:C)") == true) 
+          result = Input.trigger?(:C)
+        end
+        if (eval("Input.trigger?(:B)") == true) 
+          result = Input.trigger?(:B)
+        end
+        if (eval("Input.trigger?(:A)") == true) 
+          result = Input.trigger?(:A)
+        end
+       end
     when 12  # Script
       result = eval(@params[1])
     when 13  # Vehicle
