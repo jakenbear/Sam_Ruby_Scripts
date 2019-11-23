@@ -1,10 +1,10 @@
 #==============================================================================
 #
 # ▼ Yanfly Engine Ace - Ace Save Engine v1.02 and Todd's Autosave v1.1.0
-# -- Last Updated: 12/21/13
+# -- Last Updated: 11/22/2019
 # -- Level: Normal
 # -- Requires: n/a
-#
+# -- SAM VERSION : 1.01
 #==============================================================================
  
 $imported = {} if $imported.nil?
@@ -63,8 +63,13 @@ module YEA
    
     # These are the icons
     SAVE_ICON  = 1247  # Icon used to indicate a save is present.
-    EMPTY_ICON = 1244       # Icon used to indicate an empty file.
-   
+    EMPTY_ICON = 1244  # Icon used to indicate an empty file.
+    SAM_ICON = 1246 # ICON To draw when the var below is NOT = 0
+    # Variable used to toggle Dynamic Icon for SAM 
+    # 0 = SAVE_ICON
+    # Not 0 = SAM ICON
+    SAVE_ICON_VARIABLE = 1996 
+           
     #=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
     # - Action Window Settings -
     #=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
@@ -286,7 +291,12 @@ class Window_FileList < Window_Selectable
   #--------------------------------------------------------------------------
   def save_icon?(header)
     return Icon.empty_icon if header.nil?
-    return Icon.save_icon
+    #Dynamic Icon return
+    if header[:variables][YEA::SAVE::SAVE_ICON_VARIABLE] == 0
+      return YEA::SAVE::SAVE_ICON 
+    else
+      return YEA::SAVE::SAM_ICON   
+    end
   end
  
 end # Window_FileList
