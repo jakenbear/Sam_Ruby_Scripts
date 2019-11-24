@@ -4,7 +4,7 @@
 # -- Last Updated: 11/22/2019
 # -- Level: Normal
 # -- Requires: n/a
-# -- SAM VERSION : 1.01
+# -- SAM VERSION : 1.02
 #==============================================================================
  
 $imported = {} if $imported.nil?
@@ -58,16 +58,16 @@ module YEA
     # screen. This also adjusts the maximum number of saves a player can make,
     # the way the slot names appear, and the icons used.
     #=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
-    MAX_FILES = 8         # Maximum saves a player can make. Without Autosave.
+    MAX_FILES = 12         # Maximum saves a player can make. Without Autosave.
     SLOT_NAME = "Life #%s"  # How the file slots will be named.
    
     # These are the icons
     SAVE_ICON  = 1247  # Icon used to indicate a save is present.
     EMPTY_ICON = 1244  # Icon used to indicate an empty file.
-    SAM_ICON = 1246 # ICON To draw when the var below is NOT = 0
     # Variable used to toggle Dynamic Icon for SAM 
     # 0 = SAVE_ICON
-    # Not 0 = SAM ICON
+    # Not 0 = This will use the ICON ID of what you set the VAR below to
+    # ie. if Var[1996] = 1242, it wil use the 1242 icon (hamburger)
     SAVE_ICON_VARIABLE = 1996 
            
     #=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
@@ -295,7 +295,7 @@ class Window_FileList < Window_Selectable
     if header[:variables][YEA::SAVE::SAVE_ICON_VARIABLE] == 0
       return YEA::SAVE::SAVE_ICON 
     else
-      return YEA::SAVE::SAM_ICON   
+      return header[:variables][YEA::SAVE::SAVE_ICON_VARIABLE]
     end
   end
  

@@ -124,8 +124,7 @@ public
   
   def vx_fullscreen?
     rect = screen_rect
-    rect.width == 640 and rect.height == 480 #jar
-    #rect.width == 1280 and rect.height == 720
+    rect.width == 1280 and rect.height == 720
   end
   
   def toggle_vx_fullscreen
