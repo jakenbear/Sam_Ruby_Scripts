@@ -2,7 +2,39 @@
 #------------------------------------------------------------------------------
 #  JAKES CUSTOM ENGINE EDITS
 #==============================================================================
-# FONT DEFAULTS:
+# Jakes Video Player
+class Video_Player < Game_Interpreter   
+    def initialize
+      @layers = []    
+      @id = 1
+    end
+    
+    def kill_custom_video
+      @layers[@id].dispose
+      @layers.delete_at(@id)
+    end
+    
+    def play_custom_video(filename,start_frame,end_frame,x,y,origin,loops,wait_time)
+      @loop_tracker = loops
+      @layer = ASM_Layer.new
+      @layer.set_origin(origin)
+      @layer.x = x
+      @layer.y = y
+      @layer.z = @id + 1 + 100
+      @layer.opacity = 255
+      @layer.zoom_x = ASM::graphics_width_scale
+      @layer.zoom_y = ASM::graphics_height_scale
+      @layers[@id] = @layer
+      
+      for j in 1..loops do
+        for i in start_frame..end_frame do
+          wait(wait_time)
+          @layers[@id].set_image(filename + i.to_s)
+        end
+      end      
+    end
+end #class
+# Jakes Video Player
 
 module Colors
   #--------------------------------------------------------------------------#
