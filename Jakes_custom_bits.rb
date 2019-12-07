@@ -3,6 +3,26 @@
 #  JAKES CUSTOM ENGINE EDITS
 #==============================================================================
 # Jakes Video Player
+#
+################################
+# Sample Calls
+# v = Video_Player.new
+# v.play_custom_video("anims/ANIM_AguaCanyon",10,20,0,0,0,3,4)
+# v.play_custom_video("anims/SunSet",1,47,0,0,0,1,12)
+# v.kill_custom_video
+# ##############################
+# Need to call v = Video_Player.new to create 
+# Options are: 
+# (filename,start_frame,end_frame,x,y,origin,loops,wait_time)
+#  filename: The name o the folder and base file name without frame #
+#  start_frame: What frame to start at, default this to 1
+#  end_frame: What frame to end at. Make sure it exists
+#  x: the X postion to play the movie at
+#  y: the Y postion to play the movie at
+#  origin: The image origin, default this to 0
+#  loops: Default to 1 loop, but how many times it loops
+#  wait_time: The time bewtween changing images. Must be integer
+#
 class Video_Player < Game_Interpreter   
     def initialize
       @layers = []    
