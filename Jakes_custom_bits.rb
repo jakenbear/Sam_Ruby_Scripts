@@ -7,9 +7,10 @@
 ################################
 # Sample Calls
 # v = Video_Player.new
-# v.play_custom_video("anims/ANIM_AguaCanyon",10,20,0,0,0,3,4)
-# v.play_custom_video("anims/SunSet",1,47,0,0,0,1,12)
-# v.kill_custom_video
+# v.play_custom_video(1,"anims/ANIM_AguaCanyon",1,19,400,216,0,20,2,0,255)
+# v.kill_custom_video(1)
+# v.play_custom_video(2,"anims/SunSet",1,47,0,0,0,1,12,0,255)
+# v.kill_custom_video(2)
 # ##############################
 # Need to call v = Video_Player.new to create 
 # Options are: 
