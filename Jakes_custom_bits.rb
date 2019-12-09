@@ -1,6 +1,6 @@
 #==============================================================================
 #------------------------------------------------------------------------------
-#  JAKES CUSTOM ENGINE EDITS
+#  JAKES CUSTOM ENGINE EDITS Version 1.4
 #==============================================================================
 # Jakes Video Player
 #
@@ -13,45 +13,61 @@
 # ##############################
 # Need to call v = Video_Player.new to create 
 # Options are: 
-# (filename,start_frame,end_frame,x,y,origin,loops,wait_time)
+# (id,filename,start_frame,end_frame,x,y,origin,loops,wait_time,reverse,opacity)
+#  id: The layer Id to play the video on. 
 #  filename: The name o the folder and base file name without frame #
 #  start_frame: What frame to start at, default this to 1
 #  end_frame: What frame to end at. Make sure it exists
-#  x: the X postion to play the movie at
-#  y: the Y postion to play the movie at
-#  origin: The image origin, default this to 0
-#  loops: Default to 1 loop, but how many times it loops
-#  wait_time: The time bewtween changing images. Must be integer
+#  x: the X postion to play the movie at. Default: 0
+#  y: the Y postion to play the movie at. Default: 0
+#  origin: The image origin. Default: 0
+#  loops: Default to 1 loop, but how many times it loops. Default: 1
+#  wait_time: Time bewtween changing images. Must be integer. Default: 2
+#  reverse: 0 = Play forward, 1 = play frames in reverse
+#  opacity: Image opacity. Default = 255 (range (0 to 255)
 #
 class Video_Player < Game_Interpreter   
     def initialize
       @layers = []    
-      @id = 1
     end
     
-    def kill_custom_video
-      @layers[@id].dispose
-      @layers.delete_at(@id)
+    def kill_custom_video(id)
+      @layers[id].dispose
+      @layers.delete_at(id)
+    end
+  
+    def get_layer(id)
+      return @layers[id]
     end
     
-    def play_custom_video(filename,start_frame,end_frame,x,y,origin,loops,wait_time)
+    def play_custom_video(id,filename,start_frame,end_frame,x=0,y=0,origin=0,loops=1,wait_time=2,reverse=0,opacity=255)
       @loop_tracker = loops
       @layer = ASM_Layer.new
       @layer.set_origin(origin)
       @layer.x = x
       @layer.y = y
-      @layer.z = @id + 1 + 100
-      @layer.opacity = 255
+      @layer.opacity = opacity
+      @layer.z = id + 1 + 100
       @layer.zoom_x = ASM::graphics_width_scale
       @layer.zoom_y = ASM::graphics_height_scale
-      @layers[@id] = @layer
+      @layers[id] = @layer
       
-      for j in 1..loops do
-        for i in start_frame..end_frame do
-          wait(wait_time)
-          @layers[@id].set_image(filename + i.to_s)
-        end
-      end      
+      if reverse == 0
+        for j in 1..loops do
+          for i in start_frame..end_frame do
+            wait(wait_time)
+            @layers[id].set_image(filename + i.to_s)
+          end
+        end      
+      else
+        #reverse
+        for j in 1..loops do
+          for i in end_frame.downto(start_frame) do
+            wait(wait_time)
+            @layers[id].set_image(filename + i.to_s)
+          end
+        end   
+      end
     end
 end #class
 # Jakes Video Player
