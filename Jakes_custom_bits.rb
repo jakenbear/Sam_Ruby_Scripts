@@ -235,15 +235,17 @@ class Game_Interpreter
         if (eval("Input.trigger?(:UP)") == true) && (mydir == 8) 
           result = Input.trigger?(:UP)
         end
-        if (eval("Input.trigger?(:C)") == true) 
-          result = Input.trigger?(:C)
-        end
-        if (eval("Input.trigger?(:B)") == true) 
-          result = Input.trigger?(:B)
-        end
-        if (eval("Input.trigger?(:A)") == true) 
-          result = Input.trigger?(:A)
-        end
+        
+        #Disabled , controller players
+        #if (eval("Input.trigger?(:C)") == true) 
+        #  result = Input.trigger?(:C)
+        #end
+        #if (eval("Input.trigger?(:B)") == true) 
+        #  result = Input.trigger?(:B)
+        #end
+        #if (eval("Input.trigger?(:A)") == true) 
+        #  result = Input.trigger?(:A)
+        #end
        end
     when 12  # Script
       result = eval(@params[1])
@@ -253,4 +255,22 @@ class Game_Interpreter
     @branch[@indent] = result
     command_skip if !@branch[@indent]
   end
+end
+
+#Start Cursor for text entry on backspace
+# Set VAR 1820 to the starting position you want 
+# The backspace is position 88 
+class Window_NameInput < Window_Selectable
+
+def initialize(edit_window)
+    super(edit_window.x, edit_window.y + edit_window.height + 8,
+          edit_window.width + 20 , fitting_height(9))
+    @edit_window = edit_window
+    @page = 0
+    @index = $game_variables[1820]
+    refresh
+    update_cursor
+    activate
+end
+
 end
