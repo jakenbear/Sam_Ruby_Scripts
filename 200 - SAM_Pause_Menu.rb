@@ -127,6 +127,8 @@ module YEA
      # :blank,
      # :to_title,     # Returns to the title screen.
      # :shutdown,     # Shuts down the game.
+     :revert,
+     :default
     ] # Do not remove this.
     
     #--------------------------------------------------------------------------
@@ -207,17 +209,17 @@ module YEA
                       "Hold SHIFT to change increment by 10."
                      ], # Do not remove this.
     # -------------------------------------------------------------------------
-      :volume_bgm => ["BGM Volume", 12, 4, # Options 1 & 2 are Gauge Colours.
+      :volume_bgm => ["Background Music", 12, 4, # Options 1 & 2 are Gauge Colours.
       "Hot Keys: \n" +                
       "F5 = Fullscreen Toggle | Hotkeys: 1 = Cellphone | 2 = Inventory | 3 = Save/Load"                      
                      ], # Do not remove this.
     # -------------------------------------------------------------------------
-      :volume_bgs => ["BGS Volume", 13, 5, # Options 1 & 2 are Gauge Colours.
+      :volume_bgs => ["Ambient Sounds", 13, 5, # Options 1 & 2 are Gauge Colours.
      "Hot Keys: \n" +                
       "F5 = Fullscreen Toggle | Hotkeys: 1 = Cellphone | 2 = Inventory | 3 = Save/Load"                      
                      ], # Do not remove this.
     # -------------------------------------------------------------------------
-      :volume_sfx => ["SFX Volume", 14, 6, # Options 1 & 2 are Gauge Colours.
+      :volume_sfx => ["Sound Effects", 14, 6, # Options 1 & 2 are Gauge Colours.
              "Hot Keys: \n" +                
       "F5 = Fullscreen Toggle | Hotkeys: 1 = Cellphone | 2 = Inventory | 3 = Save/Load"                      
                      ], # Do not remove this.

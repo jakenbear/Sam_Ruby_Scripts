@@ -274,3 +274,26 @@ def initialize(edit_window)
 end
 
 end
+
+# This scriptlet changes the default stepping behavior 
+# for followers.
+# Settings are as follows:
+# SWITCH 2885
+# [OFF] - Followers will never step with player
+# [ON] - Followers will step with player
+
+class Game_Follower < Game_Character
+
+  def update
+    @move_speed     = $game_player.real_move_speed
+    @transparent    = $game_player.transparent
+    @walk_anime     = $game_player.walk_anime
+    if  $game_switches[2885] == true
+      @step_anime     = $game_player.step_anime
+    end
+    @direction_fix  = $game_player.direction_fix
+    @opacity        = $game_player.opacity
+    @blend_type     = $game_player.blend_type
+    super
+  end
+end
