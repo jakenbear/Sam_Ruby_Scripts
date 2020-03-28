@@ -5,11 +5,27 @@
 #==============================================================================
 
 class Scene_Shop < Scene_MenuBase
+  
+  #CREATE OUR PACK to ITEMS LIST HERE
+  #Format: Pack_Item => [Item_it_Becomes, How_Many]
+  P_LIST = 
+    {
+    510=>[539,12],
+    566=>[565,6],
+    568=>[567,6],
+    570=>[569,6],
+    572=>[571,6],
+    573=>[565,12],
+    574=>[567,12],
+    575=>[569,12],
+    576=>[571,12]
+    }
+  #END PACK ITEM LIST
+  
   def start
     @shop_window = nil
     @buy_window = nil
     @item = nil
-    
     super
   end
   
@@ -159,7 +175,20 @@ class Scene_Shop < Scene_MenuBase
   #--------------------------------------------------------------------------
   def do_buy(number)
     self.lose_money(number * buying_price)
-    $game_party.gain_item(@item, number)
+    if P_LIST.key?(@item.id)
+      #Pack Item purchase
+      new_item = P_LIST[@item.id][0] 
+      new_number = P_LIST[@item.id][1] 
+      p "Bought Item: " + @item.id.to_s + " Got => +" +
+         new_number.to_s + " Item: " +  new_item.to_s
+      new_item = P_LIST[@item.id][0] 
+      new_number = P_LIST[@item.id][1] 
+      $game_party.gain_item($data_items[new_item], new_number)
+    else
+      #Regular purchase
+      p "Regular Purchase +1 Item: " + @item.id.to_s 
+      $game_party.gain_item(@item, number) 
+    end
   end
   
   #--------------------------------------------------------------------------
