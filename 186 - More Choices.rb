@@ -84,7 +84,7 @@ class Game_Interpreter
          break if book_found
       end
       
-      #default
+      #default condition
       $game_message.choices.push("Something Terrible")
       $game_variables[1343] = 0
       book_found = true
