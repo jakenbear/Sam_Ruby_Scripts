@@ -27,48 +27,89 @@ class Game_Interpreter
     case p
     
       when "BannedBooks"
-        $game_message.choices.push("Something Good")
-        if $game_switches[1845]
-          $game_message.choices.push("Something Gay")
-          $game_variables[1343] = 1
-        else
-          if $game_switches[1846]
-            $game_message.choices.push("Something Racial")
-            $game_variables[1343] = 2
-          else
-            if $game_switches[1848]
-              $game_message.choices.push("Something Druggy")
-              $game_variables[1343] = 3 
-            else
-              if $game_switches[1849]
-                $game_message.choices.push("Something Suicidal")
-                $game_variables[1343] = 4
-              else
-                if $game_switches[1850]
-                  $game_message.choices.push("Something Political")
-                  $game_variables[1343] = 5
-                end
-                  if $game_switches[1851]
-                    $game_message.choices.push("Something Sexual")
-                    $game_variables[1343] = 6
-                  else
-                    if $game_switches[1867]
-                      $game_message.choices.push("Something Religious")
-                      $game_variables[1343] = 7
-                    else
-                      $game_message.choices.push("Something Terrible")
-                      $game_variables[1343] = 0
-                    end end end end end end 
-                    
-        $game_message.choices.push("Nevermind")
+      book_found = false
+      
+      #Push first choice
+      $game_message.choices.push("Something Good")
+      
+      #Pick Second Choice
+      while book_found == false
+        
+      if $game_switches[1845]
+         $game_message.choices.push("Something Gay")
+         $game_variables[1343] = 1
+         book_found = true
+         break if book_found
+      end
+      
+      if $game_switches[1846]
+         $game_message.choices.push("Something Racial")
+         $game_variables[1343] = 2
+         book_found = true
+         break if book_found
+      end
+      
+      if $game_switches[1848]
+         $game_message.choices.push("Something Druggy")
+         $game_variables[1343] = 3
+         book_found = true
+         break if book_found
+      end
+      
+      if $game_switches[1849]
+         $game_message.choices.push("Something Suicidal")
+         $game_variables[1343] = 4
+         book_found = true
+         break if book_found
+      end
+      
+      if $game_switches[1850]
+         $game_message.choices.push("Something Political")
+         $game_variables[1343] = 5
+         book_found = true
+         break if book_found
+      end
+      
+      if $game_switches[1851]
+         $game_message.choices.push("Something Sexual")
+         $game_variables[1343] = 6
+         book_found = true
+         break if book_found
+      end
+       
+      if $game_switches[1867]
+         $game_message.choices.push("Something Religious")
+         $game_variables[1343] = 7
+         book_found = true
+         break if book_found
+      end
+      
+      #default
+      $game_message.choices.push("Something Terrible")
+      $game_variables[1343] = 0
+      
+      end #while loop
+     
+     #Push Final choice             
+     $game_message.choices.push("Nevermind")
           
   when "Phone"
+
     if $game_variables[943] == 0
+      if $game_switches[2463]
+        $game_message.choices.push("Ex-Husband")  
+    else
     $game_message.choices.push("My Husband")  
+  end else
+     if $game_switches[2463]
+        $game_message.choices.push("Ex-Wife")  
     else
     $game_message.choices.push("My Wife")
-    end     
-      $game_message.choices.push("Shelly Walnut")
+    end end     
+    
+    
+    
+    $game_message.choices.push("Shelly Walnut")
    
     if $game_switches[1892]
       if $game_variables[870] == 1
@@ -218,7 +259,12 @@ class Game_Interpreter
  ##     $game_message.choices.push("??????????")
     end
       
-      $game_message.choices.push("Casey")
+      if $game_switches[2463]
+        $game_message.choices.push("Pizza Delivery")
+      else
+        $game_message.choices.push("Casey")
+      end
+        
       if $game_switches[1296]
         if $game_variables[1055] >= 2
           $game_message.choices.push("Viper")
@@ -467,8 +513,13 @@ class Game_Interpreter
       end end end end end end end end end end  
       
       $game_message.choices.push("Hang Up")
-      $game_message.choices.push("More...")
-
+      
+      if $game_switches[2463]
+       $game_message.choices.push("More...")
+     end
+     
+## END OF TELEPHONE LAYOUT
+     
       when "AlexaBooze"
       $game_message.choices.push("Beer")
       $game_message.choices.push("Whiskey")
@@ -638,6 +689,13 @@ class Game_Interpreter
     $game_message.choices.push("$2500")
     $game_message.choices.push("$5000")
     $game_message.choices.push("Nevermind")
+    
+    when "FavTown"
+    $game_message.choices.push("Portsmith")
+    $game_message.choices.push("Sequoia")
+    $game_message.choices.push("New Creole")
+    $game_message.choices.push("Gator Bay")
+    $game_message.choices.push("Slab Town")
       
     when "Freezer1"
     $game_message.choices.push("Ice Cream")
