@@ -87,6 +87,8 @@ class Game_Interpreter
       #default
       $game_message.choices.push("Something Terrible")
       $game_variables[1343] = 0
+      book_found = true
+      break if book_found
       
       end #while loop
      
