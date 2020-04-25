@@ -274,7 +274,6 @@ def initialize(edit_window)
 end
 
 end
-
 # This scriptlet changes the default stepping behavior 
 # for followers.
 # Settings are as follows:
@@ -295,5 +294,45 @@ class Game_Follower < Game_Character
     @opacity        = $game_player.opacity
     @blend_type     = $game_player.blend_type
     super
+  end
+  
+   def chase_preceding_character
+     if $game_switches[2840]
+      move_rule = !moving?
+     else
+      move_rule = moving?
+     end
+     unless move_rule
+      sx = distance_x_from(@preceding_character.x)
+      sy = distance_y_from(@preceding_character.y)
+      if sx != 0 && sy != 0
+        move_diagonal(sx > 0 ? 4 : 6, sy > 0 ? 8 : 2)
+      elsif sx != 0
+        move_straight(sx > 0 ? 4 : 6)
+      elsif sy != 0
+        move_straight(sy > 0 ? 8 : 2)
+      end
+    end
+  end
+end
+
+#Reset all self switches on map
+class Game_Interpreter  
+
+  def reset_all_self_switch_a(map_id)
+    map = load_data(sprintf("Data/Map%03d.rvdata2", map_id))
+    map.events.each do |i, event|      
+      key = [map_id, i, 'D']      
+      $game_self_switches[key] = false    
+     end  
+  end
+
+end
+
+#DOG FEEDER FIX
+class Scene_Base
+  def return_scene
+    $game_variables[2403] = 0 #DOG FEED RESET
+    SceneManager.return
   end
 end
